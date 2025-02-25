@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DungeonExplorer
+namespace EasyDungeon
 {
     public class Player
     {
@@ -8,18 +12,25 @@ namespace DungeonExplorer
         public int Health { get; private set; }
         private List<string> inventory = new List<string>();
 
-        public Player(string name, int health) 
+        public Player(string playerName, int health) 
         {
-            Name = name;
+            Name = playerName;
             Health = health;
+        }
+
+        public void LoseHealth(int damage)
+        {
+            Health = Health - damage;
+            Console.WriteLine($"Your current health is now {Health}.");
         }
         public void PickUpItem(string item)
         {
-
+            inventory.Add(item); 
         }
+
         public string InventoryContents()
         {
-            return string.Join(", ", inventory);
+            return inventory.Count > 0 ? string.Join(", ", inventory) : "Inventory empty.";
         }
     }
 }
