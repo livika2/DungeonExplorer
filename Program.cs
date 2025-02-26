@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace DungeonExplorer
+namespace Dice
 {
     internal class Program
     {
@@ -12,9 +13,8 @@ namespace DungeonExplorer
         {
             Game game = new Game();
             game.Start();
-            Console.WriteLine("Waiting for your Implementation");
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
         }
     }
 }
+
+
