@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Dice
+namespace Dungeon
 {
     internal class Program
     {
+        // The entry point of the application
         static void Main(string[] args)
-        {
+        {   
+            // Create an instance of the Game class
             Game game = new Game();
+
+            // Start the game by calling the Start method
             game.Start();
         }
     }
