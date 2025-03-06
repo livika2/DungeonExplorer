@@ -5,23 +5,39 @@ using EasyDungeon;
 
 namespace Dungeon
 {
+    /// <summary>
+    /// Manages the main game logic, including player interactions and room navigation.
+    /// </summary>
     internal class Game
     {   
+        /// <summary>
+        /// Represents the player in the game.
+        /// </summary>
         private Player player;
 
-        // List of rooms that will make up the dungeon
+        /// <summary>
+        /// List of rooms that will make up the dungeon.
+        /// </summary>
         private List<Room> rooms = new List<Room>();
 
+        /// <summary>
+        /// Tracks the index of the current room the player is in.
+        /// </summary>
         private int currentRoomIndex = 0;
 
-        // Constructor initialises the player with a default name and health
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Game"/> class with a default player.
+        /// </summary>
         public Game()
         {
+            // Creates a player with a default name and health
             player = new Player("defaultName", 100);
-
         }
 
-        // Prompts the player to enter a valid name containing letters only
+        /// <summary>
+        /// Prompts the player to enter a valid name containing letters only.
+        /// </summary>
+        /// <returns>A valid player name.</returns>
         private string GetPlayerName()
         {
             while (true)
@@ -58,7 +74,9 @@ namespace Dungeon
             }
         }
 
-        // Initialises the game world, including rooms and monsters
+        /// <summary>
+        /// Initialises the game world, including rooms and monsters.
+        /// </summary>
         public void Initialise()
         {   
             // Get the player's name and set up their health
@@ -79,7 +97,9 @@ namespace Dungeon
             rooms.Add(new Room("a ruined library with scattered, dust-covered books.", "poisonous flower"));
         }
 
-        // Starts the game loop, handling player choices and interactions
+        /// <summary>
+        /// Starts the game loop, handling player choices and interactions.
+        /// </summary>
         public void Start()
         {
 
@@ -158,7 +178,7 @@ namespace Dungeon
                 {
                     // Show the player's stats
                     Console.WriteLine($"The player {player.Name} has {player.Health} HP.");
-                    Console.WriteLine($"Inventory: {player.InventoryContents()}");
+                    Console.WriteLine($"Inventory: {player.GetInventoryContents()}");
                     Console.WriteLine("");
                 }
                 else if (nextMove == "description")

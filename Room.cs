@@ -2,21 +2,37 @@
 
 namespace EasyDungeon
 {
+    /// <summary>
+    /// Represents a room in the dungeon with a description, item and monster.
+    /// </summary>
     internal class Room
     {
-        // The description of the room
+        /// <summary>
+        /// Gets the description of the room.
+        /// </summary>
         public string Description { get; private set; }
 
-        // The item present in the room
+        /// <summary>
+        /// Gets the item present in the room.
+        /// </summary>
         public string Item { get; private set; }
 
-        // The monster present in the room, if any
+        /// <summary>
+        /// Gets the monster present in the room, if any.
+        /// </summary>
         public Monster Monster { get; private set; }
 
-        // Boolean flag to track if the monster is hidden or not
+        /// <summary>
+        /// A flag to track if the monster is hidden or not.
+        /// </summary>
         private bool isMonsterHidden = true;
 
-        // Constructor to initialise the room with a description, item and maybe monster
+        /// <summary>
+        /// Initialises a new instance of <see cref="Room"/> class.
+        /// </summary>
+        /// <param name="description">The description of the room.</param>
+        /// <param name="item">The item in the room.</param>
+        /// <param name="monster">The monster in the room, if any.</param>
         public Room(string description, string item, Monster monster = null)
         {
             Description = description;
@@ -24,49 +40,69 @@ namespace EasyDungeon
             Monster = monster;
         }
 
-        // Returns the name of the item in the room, or "no items" if none exists
+        /// <summary>
+        /// Returns the item in the room, or "no items" if none exists.
+        /// </summary>
+        /// <returns>A string representing the item in the room, or "no items" if none.</returns>
         public string Items()
         {
             return string.IsNullOrEmpty(Item) ? "no items" : Item;
         }
 
-        // Returns the room's description
+        /// <summary>
+        /// Returns the room's description.
+        /// </summary>
+        /// <returns>The description of the room.</returns>
         public string GetDescription()
         {
             return Description;
         }
 
-        // Removes the item from the room
+        /// <summary>
+        /// Removes the item from the room.
+        /// </summary>
         public void RemoveItem()
         {
             Item = ""; // Clears the item in the room
         }
 
-        // Checks if a monster exists in the room and if it's still alive 
+        /// <summary>
+        /// Checks if a monster exists in the room and if it's still alive.
+        /// </summary>
+        /// <returns>True if a monster exists and is alive, otherwise false.</returns>
         public bool IsMonster()
         {
             return Monster != null && Monster.MonsterHealth > 0;
         }
 
-        // Removes the monster from the room
+        /// <summary>
+        /// Removes the monster from the room by setting it to null.
+        /// </summary>
         public void RemoveMonster()
         {
             Monster = null; // Sets the monster to null, removing it
         }
 
-        // Checks if a monster exists in the room and is hidden
+        /// <summary>
+        /// Checks if the monster is visible (exists and hidden).
+        /// </summary>
+        /// <returns>True if the monster is visible, otherwise false.</returns>
         public bool IsMonsterVisible()
         {
             return Monster != null && isMonsterHidden;
         }
 
-        // Hides the monster in the room
+        /// <summary>
+        /// Hides the monster in the room.
+        /// </summary>
         public void HideMonster()
         {
             isMonsterHidden = false;
         }
 
-        // Resets the monster's visibility to hidden 
+        /// <summary>
+        /// Resets the monster's visibility to hidden, making it appear again.
+        /// </summary>
         public void ResetMonster()
         { 
             isMonsterHidden = true; // Resets the visibility flag to true
