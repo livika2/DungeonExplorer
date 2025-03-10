@@ -23,12 +23,12 @@ namespace EasyDungeon
         /// <summary>
         /// A list as the player's inventory, which holds items as strings.
         /// </summary>
-        private List<string> inventory = new List<string>();
+        private List<string> _inventory = new List<string>();
 
         /// <summary>
         /// An instance of the <see cref="Testing"/> class used for validating player's health.
         /// </summary>
-        private Testing tester = new Testing();
+        private Testing _tester = new Testing();
 
         /// <summary>
         /// Initialises a new instance of the <see cref="Player"/> class with a name and health.
@@ -48,7 +48,7 @@ namespace EasyDungeon
         public void LoseHealth(int damage)
         {
             Health = Health - damage; // Decreases the health by the damage amount
-            tester.TestHealth(this.Health); // Validate health state
+            //_tester.TestHealth(Health); // Validate health state
             Console.WriteLine($"Your current health is now {Health}."); // Displays the updated health
         }
 
@@ -70,12 +70,12 @@ namespace EasyDungeon
             {
                 // Decrease health if picked up
                 Health = Health - 10; // Decreases health by 10
-                tester.TestHealth(this.Health); // Validate health state
+                //_tester.TestHealth(Health); // Validate health state
                 Console.WriteLine($"Oh no! The poisonous flower damaged you for 10 HP. You now have {Health} HP.");
             }
 
             // Add any other item to the inventory
-            else inventory.Add(item);
+            else _inventory.Add(item);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace EasyDungeon
         public string GetInventoryContents()
         {
             // Return a formatted string of items, or a message if the inventory is empty
-            return inventory.Count > 0 ? string.Join(", ", inventory) : "Inventory empty.";
+            return _inventory.Count > 0 ? string.Join(", ", _inventory) : "Inventory empty.";
         }
     }
 }

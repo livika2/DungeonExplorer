@@ -13,17 +13,17 @@ namespace Dungeon
         /// <summary>
         /// Represents the player in the game.
         /// </summary>
-        private Player player;
+        private Player _player;
 
         /// <summary>
         /// List of rooms that will make up the dungeon.
         /// </summary>
-        private List<Room> rooms = new List<Room>();
+        private List<Room> _rooms = new List<Room>();
 
         /// <summary>
         /// Tracks the index of the current room the player is in.
         /// </summary>
-        private int currentRoomIndex = 0;
+        private int _currentRoomIndex = 0;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="Game"/> class with a default player.
@@ -31,7 +31,7 @@ namespace Dungeon
         public Game()
         {
             // Creates a player with a default name and health
-            player = new Player("defaultName", 100);
+            _player = new Player("defaultName", 100);
         }
 
         /// <summary>
@@ -82,19 +82,19 @@ namespace Dungeon
             // Get the player's name and set up their health
             string playerName = GetPlayerName();
             int Health = 100;
-            player = new Player(playerName, Health);
+            _player = new Player(playerName, Health);
 
             // Create and add monsters to the dungeon rooms
             Monster monster1 = new Monster("stone golem", 100, 20);
             Monster monster2 = new Monster("shadow wraith", 100, 60);
 
             // Add rooms to the dungeon with descriptions and items or monsters
-            rooms.Add(new Room("a very dark and cold room.", "leather armour"));
-            rooms.Add(new Room("a huge room filled with statues.", "torch", monster1));
-            rooms.Add(new Room("a well lit but eerie room.", "iron sword"));
-            rooms.Add(new Room("a small room with a mountain painting.", "", monster2));
-            rooms.Add(new Room("a hidden cellar with barrels of strange liquid", "health potion"));
-            rooms.Add(new Room("a ruined library with scattered, dust-covered books.", "poisonous flower"));
+            _rooms.Add(new Room("a very dark and cold room.", "leather armour"));
+            _rooms.Add(new Room("a huge room filled with statues.", "torch", monster1));
+            _rooms.Add(new Room("a well lit but eerie room.", "iron sword"));
+            _rooms.Add(new Room("a small room with a mountain painting.", "", monster2));
+            _rooms.Add(new Room("a hidden cellar with barrels of strange liquid", "health potion"));
+            _rooms.Add(new Room("a ruined library with scattered, dust-covered books.", "poisonous flower"));
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Dungeon
             while (playing)
             {   
                 // Get the current room based on the room index
-                Room currentRoom = rooms[currentRoomIndex];
+                Room currentRoom = _rooms[_currentRoomIndex];
 
                 // Checks if there is still a monster in the room and prompts the player to fight
                 if (currentRoom.IsMonsterVisible())
@@ -133,7 +133,7 @@ namespace Dungeon
                                 int monsterHP = monster.MonsterHealth;
                                 if (monsterHP != 0)
                                 {
-                                    monster.Fight(player);
+                                    monster.Fight(_player);
                                     currentRoom.RemoveMonster();
                                     break;
                                 }
@@ -165,7 +165,7 @@ namespace Dungeon
                     if (!string.IsNullOrEmpty(currentRoom.Item))
                     {
                         Console.WriteLine($"You picked up: {currentRoom.Item}.");
-                        player.PickUpItem(currentRoom.Item);
+                        _player.PickUpItem(currentRoom.Item);
                         Console.WriteLine("");
                         currentRoom.RemoveItem();
                     }
@@ -177,8 +177,8 @@ namespace Dungeon
                 else if (nextMove == "stats")
                 {
                     // Show the player's stats
-                    Console.WriteLine($"The player {player.Name} has {player.Health} HP.");
-                    Console.WriteLine($"Inventory: {player.GetInventoryContents()}");
+                    Console.WriteLine($"The player {_player.Name} has {_player.Health} HP.");
+                    Console.WriteLine($"Inventory: {_player.GetInventoryContents()}");
                     Console.WriteLine("");
                 }
                 else if (nextMove == "description")
@@ -191,10 +191,10 @@ namespace Dungeon
                 else if (nextMove == "nextroom")
                 {   
                     // Move to the next room if possible
-                    if (currentRoomIndex < rooms.Count - 1)
+                    if (_currentRoomIndex < _rooms.Count - 1)
                     {
-                        currentRoomIndex++;
-                        rooms[currentRoomIndex].ResetMonster();
+                        _currentRoomIndex++;
+                        _rooms[_currentRoomIndex].ResetMonster();
                         Console.WriteLine("You entered the next room.");
                         Console.WriteLine("");
                     }
@@ -214,7 +214,7 @@ namespace Dungeon
                 else if (nextMove == "previousroom")
                 {
                     // Move the previous room if possible
-                    if (currentRoomIndex == 0)
+                    if (_currentRoomIndex == 0)
                     {
                         Console.WriteLine("You have arrived at the dungeon's entry door.");
                         Console.WriteLine("You cannot go further.");
@@ -222,8 +222,8 @@ namespace Dungeon
                     }
                     else
                     {
-                        currentRoomIndex--;
-                        rooms[currentRoomIndex].ResetMonster();
+                        _currentRoomIndex--;
+                        _rooms[_currentRoomIndex].ResetMonster();
                         Console.WriteLine("You entered the previous room.");
                         Console.WriteLine("");
                     }
